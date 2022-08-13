@@ -10,9 +10,11 @@ const substitutionModule = (function () {
   function substitution(input, alphabet, encode = true) {
     // your solution code here
     if (!alphabet || alphabet.length != 26) return false;
-    for (let i = 0; i < input.length; i++) {
-      if (alphabet.indexOf(input[i]) != alphabet.lastIndexOf(input[i]))
-        return false;
+    
+   const previouslyFoundLetters = {};
+    for (let i = 0; i < alphabet.length; i++) {
+      if (previouslyFoundLetters[alphabet[i]]) return false;
+      previouslyFoundLetters[alphabet[i]] = true;
     }
     if (encode) {
       return encodeMessage(input, alphabet);
